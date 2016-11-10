@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      *{margin: 0;padding: 0}
+      html,body{
+          width: 100%;height: 100%;
+      }
+      ul{
+        list-style: none;
+        display: flex;
+        flex: 1;
+      }
+      ul li{
+        flex:1;
+        font-size: 24px;
+        font-weight: 100;
+      }
+      a{
+        text-decoration: none;
+      }
+      #container{
+        width: 100%;height: 100%;
+      }
+
+    </style>
+    <script src="./utils/file-loader.js"></script>
+    <script src="./utils/route.js"></script>
+  </head>
+  <body>
+
+
+<ul>
+  <li><a href="#/home">home</a></li>
+  <li><a href="#/list">list</a></li>
+  <li><a href="#/mine">mine</a></li>
+</ul>
+<div id="container">
+
+</div>
+
+
+<script>
+
+var r = new Route({
+  routes:{
+    "/"    :"homeFunc",
+    "home" :"homeFunc",
+    "list" :"listFunc",
+    "mine" :"mineFunc"
+  },
+  homeFunc:function(){
+      fileLoader('./compo/header.html',
+      function(html){
+        container.innerHtml = html;
+      })
+  },
+  listFunc:function(){
+      fileLoader('./compo/list.html',
+      function(html){
+        container.innerHtml = html;
+      })
+  },
+  mineFunc:function(){
+      fileLoader('./compo/mine.html',
+      function(html){
+        container.innerHtml = html;
+      })
+  }
+
+})
+
+</script>
+
+
+  </body>
+</html>

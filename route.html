@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      *{margin: 0;padding: 0}
+      html,body{
+          width: 100%;height: 100%;
+      }
+      ul{
+        list-style: none;
+        display: flex;
+        flex: 1;
+      }
+      ul li{
+        flex:1;
+        font-size: 24px;
+        font-weight: 100;
+      }
+      a{
+        text-decoration: none;
+      }
+      #container{
+        width: 100%;height: 100%;
+      }
+
+    </style>
+    <script src="./utils/ajax.js"></script>
+  </head>
+  <body>
+
+
+<ul>
+  <li><a href="#/home">home</a></li>
+  <li><a href="#/list">list</a></li>
+  <li><a href="#/mine">mine</a></li>
+</ul>
+<div id="container">
+
+</div>
+
+
+<script>
+
+var container = document.getElementById('container');
+window.addEventListener('hashchange', function(e) {
+show()
+}, false);
+window.onload = function(){
+  show()
+}
+function show(){
+  let hash = location.hash.split('/')[1];
+  hash = typeof hash == 'undefined' ? 'home' : hash;
+  eval(routes[hash])();
+}
+
+var routes = {
+  "home" :"homeFunc",
+  "list" :"listFunc",
+  "mine" :"mineFunc"
+}
+
+function homeFunc(){
+    loadHtml('./compo/header.html')
+}
+function listFunc(){
+    loadHtml('./compo/list.html')
+}
+function mineFunc(){
+    loadHtml('./compo/mine.html')
+}
+
+
+function loadHtml(url){
+  console.log('load html')
+  ajax({
+    url:url,
+    success: function (response, xml) {
+      container.innerHTML = response;
+    },
+    fail: function (status) {
+        console.log(status)
+    }
+  })
+}
+
+
+</script>
+
+
+  </body>
+</html>
